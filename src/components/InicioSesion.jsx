@@ -1,7 +1,7 @@
 import { useState } from "react"
-import clienteAxios from "../config/axios";
 import { useNavigate, Link } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
+import clienteAxios from "../config/axios";
 import Navbar from "./Navbar";
 import useAuth from "../hooks/useAuth";
 import 'react-toastify/dist/ReactToastify.css';
@@ -31,8 +31,8 @@ const InicioSesion = () => {
                 toast.loading("Iniciando Sesion...", {
                     position: "top-center"
                 })
-                
-                const url = "/iniciar-sesion"
+
+                const url = "iniciar-sesion"
                 const { data } = await clienteAxios.post(url, datos)
 
                 if (data.ok != true) {
@@ -67,12 +67,11 @@ const InicioSesion = () => {
             <Navbar />
             <ToastContainer />
             <div className="min-h-screen flex items-center justify-center bg-gray-100">
-                <div className="bg-white p-8 rounded-md shadow-md w-full max-w-md">
+                <div className="bg-white p-8 rounded-md shadow-md w-full max-w-md mx-3">
                     <h2 className="text-2xl font-bold mb-6 text-gray-800 text-center">
                         Inicia Sesión
                     </h2>
                     <form onSubmit={handleSubmit} className="space-y-6">
-                        {/* Email */}
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                                 Correo Electrónico
@@ -88,7 +87,6 @@ const InicioSesion = () => {
                                 placeholder="Ingresa tu correo"
                             />
                         </div>
-                        {/* Contraseña */}
                         <div>
                             <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                                 Contraseña
@@ -104,7 +102,6 @@ const InicioSesion = () => {
                                 placeholder="Ingresa tu contraseña"
                             />
                         </div>
-                        {/* Botón de Iniciar Sesión */}
                         <div>
                             <button
                                 type="submit"
@@ -118,7 +115,6 @@ const InicioSesion = () => {
                             </button>
                         </div>
                     </form>
-                    {/* Enlaces de Registro y Contraseña */}
                     <div className="mt-6 flex justify-between items-center">
                         <Link
                             to={'/olvide-password'}
