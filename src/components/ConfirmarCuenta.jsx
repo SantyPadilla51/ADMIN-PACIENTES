@@ -21,7 +21,7 @@ const ConfirmarCuenta = () => {
     const confirmarCuenta = async () => {
         try {
             setCargando(true)
-            
+
             const url = 'confirmar-cuenta'
             const { data } = await clienteAxios.post(`${url}/${token}`)
 
@@ -43,15 +43,20 @@ const ConfirmarCuenta = () => {
 
     return (
         <>
-            <div className="text-center mt-10 text-white">
+            <div className="flex flex-col items-center justify-center bg-black h-screen text-center">
                 <ToastContainer />
-                <h1 className="text-xl">Confirma tu cuenta dando click en el boton</h1>
+                <h1 className="text-xl text-white">Confirma tu cuenta dando click en el botón</h1>
                 {cargando ? (
-                    <button className="text-white p-3 font-semibold hover:bg-green-500 mt-5" >
+                    <button className="text-white p-3 font-semibold hover:bg-green-500 mt-5">
                         <ClipLoader color={'#fff'} />
                     </button>
                 ) : (
-                    <button className="bg-green-600 font-semibold text-white p-3 hover:bg-green-500 mt-5" onClick={(e) => handleSubmit(e)}>Confirmar Cuenta</button>
+                    <button
+                        className="rounded-md bg-green-600 font-semibold text-white p-3 hover:bg-green-500 mt-5"
+                        onClick={(e) => handleSubmit(e)}
+                    >
+                        Confirmar Cuenta
+                    </button>
                 )}
             </div>
 
