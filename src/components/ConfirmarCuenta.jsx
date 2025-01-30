@@ -37,8 +37,6 @@ const ConfirmarCuenta = () => {
 
         } catch (error) {
             toast.error("Hubo un error al confirmar la cuenta. Por favor, inténtelo más tarde.")
-            console.log(error);
-            
             return
         }
     }

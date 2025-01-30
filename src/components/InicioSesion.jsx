@@ -28,24 +28,24 @@ const InicioSesion = () => {
             try {
                 setCargando(true)
 
-                toast.loading("Iniciando Sesion...", {
-                    position: "top-center"
-                })
-
                 const url = "iniciar-sesion"
                 const { data } = await clienteAxios.post(url, datos)
 
                 if (data.ok != true) {
                     toast.error(data.msg)
+                    setCargando(false)
                     return
                 } else {
+                    toast.loading("Iniciando Sesion...", {
+                        position: "top-center"
+                    })
                     setAuth(data)
                     localStorage.setItem('token', data.token)
                     setTimeout(() => {
                         navigate("/admin/pacientes")
-                    }, 300);
+                    }, 1000);
                 }
-                setCargando(false)
+                
 
             } catch (error) {
                 setCargando(false)
