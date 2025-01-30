@@ -29,10 +29,8 @@ const InicioSesion = () => {
                 setCargando(true)
 
                 const url = "iniciar-sesion"
-                const { data } = await clienteAxios.post(url, datos)
-                console.log(data);
+                const { data } = await clienteAxios.post(url, datos, { withCredentials: true })
                 
-
                 if (data.ok != true) {
                     toast.error(data.msg)
                     setCargando(false)
