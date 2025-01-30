@@ -1,0 +1,8 @@
+{
+    "rewrites": [
+        {
+            "source": "/confirmar-cuenta/:token",
+            "destination": "/index.html"
+        }
+    ]
+}
