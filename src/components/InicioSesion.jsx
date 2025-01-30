@@ -30,6 +30,8 @@ const InicioSesion = () => {
 
                 const url = "iniciar-sesion"
                 const { data } = await clienteAxios.post(url, datos)
+                console.log(data);
+                
 
                 if (data.ok != true) {
                     toast.error(data.msg)
