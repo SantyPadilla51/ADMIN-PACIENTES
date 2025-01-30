@@ -23,7 +23,9 @@ const ConfirmarCuenta = () => {
             setCargando(true)
 
             const url = 'confirmar-cuenta'
-            const { data } = await clienteAxios.post(`${url}/${token}`)
+            const { data } = await clienteAxios.get(`${url}/${token}`)
+            console.log(data);
+            
 
             if (data.ok != true) {
                 toast.error(data.msg)
