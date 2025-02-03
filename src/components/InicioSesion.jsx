@@ -30,7 +30,7 @@ const InicioSesion = () => {
 
                 const url = "iniciar-sesion"
                 const { data } = await clienteAxios.post(url, datos, { withCredentials: true })
-                
+
                 if (data.ok != true) {
                     toast.error(data.msg)
                     setCargando(false)
@@ -45,7 +45,7 @@ const InicioSesion = () => {
                         navigate("/admin/pacientes")
                     }, 1000);
                 }
-                
+
 
             } catch (error) {
                 setCargando(false)
