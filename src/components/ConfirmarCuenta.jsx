@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom"
-import { useNavigate } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import ClipLoader from "react-spinners/ClipLoader";
 import clienteAxios from "../config/axios";
@@ -10,7 +9,6 @@ const ConfirmarCuenta = () => {
 
     const [cargando, setCargando] = useState(false)
     const params = useParams()
-    const navigate = useNavigate()
     const { token } = params
 
     const handleSubmit = (e) => {
@@ -26,17 +24,14 @@ const ConfirmarCuenta = () => {
 
             const url = 'confirmar-cuenta'
             const { data } = await clienteAxios.get(`${url}/${token}`)
-            console.log(data);
-            
 
             if (data.ok != true) {
                 toast.error(data.msg)
                 setCargando(false)
             } else {
-                toast.success(data.msg)
-                setTimeout(() => {
-                    navigate("/")
-                }, 2000);
+                toast.success(data.msg);
+                setCargando(false);
+                return;
             }
 
         } catch (error) {

@@ -28,7 +28,7 @@ const InicioSesion = () => {
             try {
                 setCargando(true)
 
-                const url = "iniciar-sesion"
+                const url = "/iniciar-sesion"
                 const { data } = await clienteAxios.post(url, datos, { withCredentials: true })
 
                 if (data.ok != true) {
