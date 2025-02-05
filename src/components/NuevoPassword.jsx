@@ -1,15 +1,13 @@
 import { useState } from "react"
 import { useParams } from "react-router-dom"
-import ClipLoader from "react-spinners/ClipLoader";
 import { useNavigate } from "react-router-dom";
-import Navbar from "./Navbar";
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import ClipLoader from "react-spinners/ClipLoader";
+import Navbar from "./Navbar";
 import clienteAxios from "../config/axios";
+import 'react-toastify/dist/ReactToastify.css';
 
 const NuevoPassword = () => {
-
-    const { token } = useParams()
     const [password, setPassword] = useState("")
     const [repetirPassword, setRepetirPassword] = useState("")
     const [cargando, setCargando] = useState(false)
@@ -23,23 +21,18 @@ const NuevoPassword = () => {
             try {
                 setCargando(true)
 
-                const request = await fetch(
-                    `https://backend-adm.onrender.com/olvide-password/${token}`,
-                    {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            password
-                        })
+                const token = localStorage.getItem('token')
+                const url = `/olvide-password/${token}`
+                const config = {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
                     }
-                )
-                const data = await request.json()
-                console.log(data);
-                
-                
-                if (data.estado != true) {
+                }
+
+                const { data } = await clienteAxios.post(url, password, config)
+
+                if (data.ok != true) {
                     toast.error("Hubo un error al cambiar la contraseña")
                     setCargando(false)
                 } else {
@@ -74,29 +67,43 @@ const NuevoPassword = () => {
         <>
             <ToastContainer />
             <Navbar />
-            <form className="mt-32 mx-3 drop-shadow-lg bg-slate-400 flex flex-col p-4  gap-3 lg:w-1/3 lg:mx-auto lg:mt-32" onSubmit={handleSubmit}>
+            <form
+                className="mt-32 mx-4 bg-white shadow-lg rounded-2xl p-6 flex flex-col gap-5 lg:w-1/3 lg:mx-auto"
+                onSubmit={handleSubmit}
+            >
+                <h1 className="text-2xl font-bold text-center text-gray-800 uppercase">
+                    Genera un nuevo password
+                </h1>
 
-                <h1 className="text-xl bg-white p-2 uppercase">Genera un nuevo password</h1>
-
-                <div className="flex flex-col mt-6">
-                    <label>Nuevo Password:</label>
-                    <input className="p-1" name="password" onChange={(e) => handleChange(e)} />
+                <div className="flex flex-col">
+                    <label className="text-gray-600 font-medium">Nuevo Password:</label>
+                    <input
+                        className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        type="text"
+                        name="password"
+                        onChange={(e) => handleChange(e)}
+                        required
+                    />
                 </div>
 
-                <div className="flex flex-col ">
-                    <label>Repite el Password:</label>
-                    <input className="p-1" name="repetirPassword" onChange={(e) => handleChange(e)} />
+                <div className="flex flex-col">
+                    <label className="text-gray-600 font-medium">Repite el Password:</label>
+                    <input
+                        className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        type="text"
+                        name="repetirPassword"
+                        onChange={(e) => handleChange(e)}
+                        required
+                    />
                 </div>
 
-                {cargando ? (
-                    <button className="bg-blue-800 text-white p-2 hover:bg-blue-600 mt-5" type="submit">
-                        <ClipLoader color={'#fff'} />
-                    </button>
-                ) : (
-                    <button className="bg-blue-800 text-white p-2 hover:bg-blue-600 mt-5" type="submit">Guardar Password</button>
-                )}
-
-
+                <button
+                    className="bg-blue-600 text-white font-medium py-2 rounded-lg hover:bg-blue-700 transition flex justify-center items-center gap-2 mt-4 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                    type="submit"
+                    disabled={cargando}
+                >
+                    {cargando ? <ClipLoader color="#fff" size={20} /> : "Guardar Password"}
+                </button>
             </form>
         </>
     )

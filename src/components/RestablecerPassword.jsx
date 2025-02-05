@@ -26,6 +26,7 @@ const RestablecerPassword = () => {
     try {
       
       const url = "olvide-password"
+      
       const {data} = await clienteAxios.post(url, { email }, {
         headers: { 'Content-Type': 'application/json' }
       });
