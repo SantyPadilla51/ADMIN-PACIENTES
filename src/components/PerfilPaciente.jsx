@@ -44,7 +44,7 @@ const PerfilPaciente = () => {
         sexo: data.paciente[0].sexo || "",
         email: data.paciente[0].email || "",
         telefono: data.paciente[0].telefono || "",
-        medicacion: data.paciente[0].medicacion || "",
+        medicacion: data.paciente[0].medicacion || "Sin medicacion",
         sintomas: data.paciente[0].sintomas || ""
       });
     } catch (error) {
@@ -99,7 +99,7 @@ const PerfilPaciente = () => {
     <>
       <NavbarAdmin />
       <ToastContainer />
-      <div className="max-w-4xl mx-4 bg-white p-8 rounded-md shadow-md mt-10">
+      <div className="max-w-4xl mx-4 lg:mx-auto bg-white p-8 rounded-md shadow-md mt-10">
         <h2 className="text-2xl font-bold mb-6 text-gray-800 text-center">Perfil del Paciente</h2>
         <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
@@ -107,7 +107,7 @@ const PerfilPaciente = () => {
               Nombre
             </label>
             <h2
-              className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none sm:text-sm"
+              className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
             >{formData.nombre}</h2>
           </div>
 
@@ -116,7 +116,7 @@ const PerfilPaciente = () => {
               Apellido
             </label>
             <h2
-              className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none sm:text-sm"
+              className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
             >{formData.apellido}</h2>
           </div>
 
@@ -125,7 +125,7 @@ const PerfilPaciente = () => {
               Edad
             </label>
             <h2
-              className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none sm:text-sm"
+              className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
             >{formData.edad}</h2>
           </div>
 
@@ -134,7 +134,7 @@ const PerfilPaciente = () => {
               Teléfono
             </label>
             <h2
-              className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none sm:text-sm"
+              className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
             >{formData.telefono}</h2>
           </div>
 
@@ -143,7 +143,7 @@ const PerfilPaciente = () => {
               DNI
             </label>
             <h2
-              className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none sm:text-sm"
+              className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
             >{formData.dni}</h2>
           </div>
 
@@ -152,7 +152,7 @@ const PerfilPaciente = () => {
               Sexo
             </label>
             <h2
-              className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none sm:text-sm"
+              className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
             >{formData.sexo}</h2>
           </div>
 
@@ -161,7 +161,7 @@ const PerfilPaciente = () => {
               Email
             </label>
             <h2
-              className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none sm:text-sm"
+              className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
             >{formData.email}</h2>
           </div>
 
@@ -170,7 +170,7 @@ const PerfilPaciente = () => {
               Medicacion
             </label>
             <h2
-              className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none sm:text-sm"
+              className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
             >{formData.medicacion}</h2>
           </div>
 
@@ -179,11 +179,11 @@ const PerfilPaciente = () => {
               Sintomas
             </label>
             <h2
-              className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none sm:text-sm"
+              className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
             >{formData.sintomas}</h2>
           </div>
 
-          <div className="flex gap-4 justify-evenly mt-5 flex-wrap">
+          <div className="flex gap-4 justify-evenly mt-5 md:col-span-2">
             <button
               className="w-96 text-sm bg-gray-600 hover:bg-gray-800 text-white py-2 px-4 rounded-md"
               onClick={() => navigate(`/admin/pacientes/editar/${formData.id}`)}

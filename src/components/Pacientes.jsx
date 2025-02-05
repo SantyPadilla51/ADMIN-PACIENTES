@@ -110,7 +110,7 @@ const Pacientes = () => {
 
             </div>
 
-            <div className=" md:grid md:grid-cols-3 lg:grid lg:grid-cols-6 gap-4 m-8">
+            <div className=" md:grid md:grid-cols-3 lg:grid lg:grid-cols-5 gap-4 m-8">
                 {pacienteParticular ? (
                     <div className="bg-white flex flex-col gap-10 p-2 rounded-md" key={pacienteParticular.id}>
                         <div className="flex flex-col gap-2">

@@ -157,6 +157,7 @@ const RegistrarPaciente = () => {
                             <option value="">Selecciona una opción</option>
                             <option value="masculino">Masculino</option>
                             <option value="femenino">Femenino</option>
+                            <option value="no definido">No definido</option>
                         </select>
                     </div>
 
@@ -205,16 +206,13 @@ const RegistrarPaciente = () => {
                         />
                     </div>
 
-                    <div className="md:col-span-2 flex justify-center">
-                        <button
-                            onClick={(e) => handleSubmit(e)}
-                            disabled={cargando}
-                            type="submit"
-                            className={`w-full md:w-auto bg-indigo-600 py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500  text-white p-2 mt-5 ${cargando ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-600'}`}
-                        >
-                            {cargando ? "Guardando..." : "Guardar Cambios"}
-                        </button>
-                    </div>
+                    <button
+                        disabled={cargando}
+                        type="submit"
+                        className={`col-span-2 w-full md:w-auto bg-indigo-600 py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500  text-white p-2 mt-5 ${cargando ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-600'}`}
+                    >
+                        {cargando ? "Guardando..." : "Guardar Cambios"}
+                    </button>
                 </form>
             </div>
         </>

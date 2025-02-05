@@ -56,10 +56,10 @@ const EditarPerfil = () => {
             }
 
             const { data } = await clienteAxios.put(url, datos, config);
-            
+
 
             if (data.ok === true) {
-                toast.success("Perfil actualizado correctamente",{
+                toast.success("Perfil actualizado correctamente", {
                     position: "top-center"
                 })
                 setCargando(false)
@@ -90,58 +90,59 @@ const EditarPerfil = () => {
         <>
             <NavbarAdmin />
             <ToastContainer />
-            <div className="max-w-md mx-4 bg-white p-6 rounded-lg shadow-md mt-10">
+            <div className="max-w-2xl mx-4 lg:mx-auto bg-white p-6 rounded-lg shadow-md mt-10">
                 <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6">Editar Perfil</h2>
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-8">
                     <div>
-                        <label className="block text-gray-600 text-sm font-medium">Nombre</label>
+                        <label className="text-gray-600 text-sm font-medium">Nombre</label>
                         <input
                             type="text"
                             name="nombre"
                             value={datos.nombre}
                             onChange={handleChange}
-                            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+                            className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
                             required
                         />
                     </div>
                     <div>
-                        <label className="block text-gray-600 text-sm font-medium">Apellido</label>
+                        <label className="text-gray-600 text-sm font-medium">Apellido</label>
                         <input
                             type="text"
                             name="apellido"
                             value={datos.apellido}
                             onChange={handleChange}
-                            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+                            className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
                             required
                         />
                     </div>
                     <div>
-                        <label className="block text-gray-600 text-sm font-medium">Email</label>
+                        <label className=" text-gray-600 text-sm font-medium">Email</label>
                         <input
                             type="email"
                             name="email"
                             value={datos.email}
                             onChange={handleChange}
-                            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+                            className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
                             required
                         />
                     </div>
                     <div>
-                        <label className="block text-gray-600 text-sm font-medium">DNI</label>
+                        <label className=" text-gray-600 text-sm font-medium">DNI</label>
                         <input
                             type="text"
                             name="dni"
                             maxLength={8}
                             value={datos.dni}
                             onChange={handleChange}
-                            className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+                            className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
                             required
                         />
                     </div>
-                    <div className="flex items-center text-center justify-around">
+
+                    <div className="flex items-center justify-around mt-3 col-span-2">
                         <label>Especialidad:</label>
-                        <select className="bg-slate-300 p-2 rounded-md" onChange={handleChange} name="especialidad" required>
-                            <option >{datos.especialidad}</option>
+                        <select className="mt-1 p-2 rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm" onChange={handleChange} name="especialidad" required>
+                            <option value="">{datos.especialidad}</option>
                             <option value="cardiología">Cardiología</option>
                             <option value="traumatologia">Traumatología</option>
                             <option value="neurología">Neurología</option>
@@ -152,18 +153,16 @@ const EditarPerfil = () => {
                             <option value="otros">Otros</option>
                         </select>
                     </div>
-                    {cargando ? (
-                        <button type="submit" disabled className="w-full bg-gray-300 text-white py-2 rounded-md hover:bg-gray-400 transition">
-                            Guardando...
-                        </button>
-                    ) : (
-                        <button
-                            type="submit"
-                            className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
-                        >
-                            Guardar Cambios
-                        </button>
-                    )}
+
+                    <button
+                        disabled={cargando}
+                        type="submit"
+                        className={`col-span-2 w-full bg-indigo-600 py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500  text-white p-2 mt-5 
+                        ${cargando ? 'opacity-50 cursor-not-allowed' :
+                                'hover:bg-blue-600'}`}
+                    >
+                        {cargando ? "Guardando..." : "Guardar Cambios"}
+                    </button>
 
                 </form>
             </div>
