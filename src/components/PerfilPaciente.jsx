@@ -98,7 +98,7 @@ const PerfilPaciente = () => {
     <>
       <NavbarAdmin />
       <ToastContainer />
-      <div className="max-w-4xl mx-auto bg-white p-8 rounded-md shadow-md mt-10">
+      <div className="max-w-4xl mx-4 bg-white p-8 rounded-md shadow-md mt-10">
         <h2 className="text-2xl font-bold mb-6 text-gray-800 text-center">Perfil del Paciente</h2>
         <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
@@ -182,55 +182,57 @@ const PerfilPaciente = () => {
             >{formData.sintomas}</h2>
           </div>
 
+          <div className="flex gap-4 justify-evenly mt-5 flex-wrap">
+            <button
+              className="w-96 text-sm bg-gray-600 hover:bg-gray-800 text-white py-2 px-4 rounded-md"
+              onClick={() => navigate(`/admin/pacientes/editar/${formData.id}`)}
+            >
+              Editar Paciente
+            </button>
+
+            <button className="w-96 text-sm bg-blue-500 hover:bg-blue-600 text-white py-2 px-4  rounded-md" onClick={() => navigate(`/admin/pacientes/actualizar-sintomas/${formData.id}`)}>
+              Actualizar Sintomas
+            </button>
+
+            <button className="w-96 text-sm bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md" onClick={handleEliminar}>
+              Eliminar Paciente
+            </button>
+          </div >
+
         </form>
 
-        <div className="flex gap-4 justify-evenly mt-5">
-          <button
-            className="text-sm bg-gray-600 hover:bg-gray-800 text-white py-2 px-4 rounded-md"
-            onClick={() => navigate(`/admin/pacientes/editar/${formData.id}`)}
-          >
-            Editar Paciente
-          </button>
 
-          <button className="text-sm bg-blue-500 hover:bg-blue-600 text-white py-2 px-4  rounded-md" onClick={() => navigate(`/admin/pacientes/actualizar-sintomas/${formData.id}`)}>
-            Actualizar Sintomas
-          </button>
-
-          <button className="text-sm bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md" onClick={handleEliminar}>
-            Eliminar Paciente
-          </button>
-
-          {eliminando && (
-            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-              <div className="p-6 bg-white shadow-lg rounded-lg w-96">
-                <p className="text-gray-800 mb-4 text-center font-semibold">
-                  ¿Estás seguro de que quieres eliminar este paciente?
-                </p>
-                <div className="flex justify-center gap-4">
-                  <button
-                    type="submit"
-                    disabled={cargando}
-                    onClick={() => eliminarPaciente(id)}
-                    className={`px-4 py-2 rounded-lg transition text-white 
+        {eliminando && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="p-6 bg-white shadow-lg rounded-lg w-96 mx-4">
+              <p className="text-gray-800 mb-4 text-center font-semibold">
+                ¿Estás seguro de que quieres eliminar este paciente?
+              </p>
+              <div className="flex justify-center gap-4">
+                <button
+                  type="submit"
+                  disabled={cargando}
+                  onClick={() => eliminarPaciente(id)}
+                  className={`px-4 py-2 rounded-lg transition text-white 
                     ${cargando ? "bg-gray-400 cursor-not-allowed" : "bg-red-500 hover:bg-red-600"}`}
-                  >
-                    {cargando ? "Eliminando..." : "Eliminar"}
-                  </button>
-                  <button
-                    className="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 transition"
-                    onClick={handleCancelar}
-                    disabled={cargando} 
-                  >
-                    Cancelar
-                  </button>
-                </div>;
+                >
+                  {cargando ? "Eliminando..." : "Eliminar"}
+                </button>
+                <button
+                  className="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 transition"
+                  onClick={handleCancelar}
+                  disabled={cargando}
+                >
+                  Cancelar
+                </button>
               </div>
             </div>
-          )}
+          </div>
+        )}
 
 
-        </div>
       </div>
+
     </>
   )
 }
