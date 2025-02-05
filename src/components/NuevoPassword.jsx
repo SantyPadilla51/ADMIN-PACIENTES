@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { useParams } from "react-router-dom"
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import ClipLoader from "react-spinners/ClipLoader";
