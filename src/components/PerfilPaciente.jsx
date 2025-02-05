@@ -82,7 +82,8 @@ const PerfilPaciente = () => {
     }
   }
 
-  const handleEliminar = () => {
+  const handleEliminar = (e) => {
+    e.preventDefault();
     setEliminando(true)
   }
 
@@ -194,7 +195,7 @@ const PerfilPaciente = () => {
               Actualizar Sintomas
             </button>
 
-            <button className="w-96 text-sm bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md" onClick={handleEliminar}>
+            <button className="w-96 text-sm bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md" onClick={(e) => handleEliminar(e)}>
               Eliminar Paciente
             </button>
           </div >
