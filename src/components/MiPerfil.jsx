@@ -1,17 +1,22 @@
+import { ToastContainer, toast } from 'react-toastify';
 import { useEffect, useState } from "react"
 import clienteAxios from "../config/axios"
 import NavbarAdmin from "./NavbarAdmin"
-import EliminarPerfilToast from "./EliminarPerfilToast"
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const MiPerfil = () => {
 
+    const [eliminando, setEliminando] = useState(false)
+    const [cargando, setCargando] = useState(false);
     const [datos, setDatos] = useState({
+        id: "",
         nombre: "",
         apellido: "",
         email: "",
-        dni: ""
+        dni: "",
+        especialidad: "",
     })
-    const [eliminarActivado, setEliminarActivado] = useState(false)
 
     const obtenerPerfil = async () => {
         try {
@@ -25,53 +30,54 @@ const MiPerfil = () => {
             const { data } = await clienteAxios.get('/perfil', config)
 
             setDatos({
+                id: data.doctor.id,
                 nombre: data.doctor.nombre,
                 apellido: data.doctor.apellido,
                 email: data.doctor.email,
+                especialidad: data.doctor.especialidad,
                 dni: data.doctor.dni,
             })
 
         } catch (error) {
-            console.log('Hubo un error');
+            toast.error('Hubo un error');
         }
     }
 
-    // const eliminarPerfil = async (e) => {
-    //     setEliminarActivado(true)
-    //     e.preventDefault()
-    // try {
-    //     const token = localStorage.getItem('token')
-    //     const resultado = await fetch('http://localhost:6543/eliminar-perfil',
-    //         {
-    //             method: "DELETE",
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //                 Authorization: `Bearer ${token}`
-    //             }
-    //         }
-    //     )
-    //     const respuesta = await resultado.json()
+    const eliminarPerfil = async (id) => {
+        setCargando(true)
+        try {
+            const token = localStorage.getItem('token')
+            const url = `/eliminar-perfil/${id}`
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                }
+            }
 
-    //     if (respuesta.ok === true) {
-    //         localStorage.removeItem('token')
-    //         toast.loading('Eliminando Cuenta...')
-    //     }
-    // }
-    // catch (error) {
-    //     console.log('Hubo un error');
-    // }
-    // }
+            const { data } = await clienteAxios.delete(url, config)
 
-    const eliminarPerfil = (e) => {
-        e.preventDefault()
-        console.log("eliminando..");
-
-        setEliminarActivado(true) // Activa el modal de confirmación
+            if (data.ok === true) {
+                localStorage.removeItem('token')
+                toast.success(data.msg,{
+                    position: "top-center"
+                })
+                setTimeout(() => {
+                    window.location.href = '/'
+                }, 2000);
+            }
+        }
+        catch (error) {
+            toast.error('Hubo un error');
+        }
     }
 
-    const cancelarEliminacion = (e) => {
-        e.preventDefault()
-        setEliminarActivado(false) // Desactiva el modal al cancelar
+    const handleEliminar = () => {
+        setEliminando(true)
+    }
+
+    const handleCancelar = () => {
+        setEliminando(false)
     }
 
     useEffect(() => {
@@ -81,28 +87,68 @@ const MiPerfil = () => {
     return (
         <>
             <NavbarAdmin />
-            <div className="mx-4 lg:w-1/2 lg:mx-auto bg-white  mt-10 p-4">
-                <h1 className="bg-black text-white p-2 mb-5 font-bold">Mi Perfil</h1>
-                <ul>
-                    <li className="font-semibold">Nombre: <span className="font-light">{datos.nombre}</span></li>
-                    <li className="font-semibold">Apellido: <span className="font-light">{datos.apellido}</span></li>
-                    <li className="font-semibold">DNI: <span className="font-light">{datos.dni}</span></li>
-                    <li className="font-semibold">Correo electrónico: <span className="font-light">{datos.email}</span></li>
-                </ul>
-                <div className="flex mt-4 justify-between">
-                    {eliminarActivado ? (
-                        <EliminarPerfilToast cancelarEliminacion={cancelarEliminacion} />
-                    ) : (
-                        <button
-                            className="bg-red-600 hover:bg-red-500 text-white p-2"
-                            onClick={eliminarPerfil}
-                        >
-                            Eliminar Cuenta
-                        </button>
-                    )}
+            <ToastContainer />
+            <div className="mx-4 lg:w-1/2 lg:mx-auto bg-white shadow-lg rounded-2xl mt-10 p-2">
+                <h1 className="text-xl font-bold text-center bg-black text-white p-3 rounded-t-2xl">
+                    Mi Perfil
+                </h1>
 
-                    <button className="bg-blue-600 hover:bg-blue-500 text-white p-2">Editar Perfil</button>
+                <div className="p-4">
+                    <ul className="space-y-3 text-gray-700">
+                        <li className="font-semibold">
+                            Nombre: <span className="font-light">{datos.nombre}</span>
+                        </li>
+                        <li className="font-semibold">
+                            Apellido: <span className="font-light">{datos.apellido}</span>
+                        </li>
+                        <li className="font-semibold">
+                            DNI: <span className="font-light">{datos.dni}</span>
+                        </li>
+                        <li className="font-semibold">
+                            Especialidad: <span className="font-light">{datos.especialidad}</span>
+                        </li>
+                        <li className="font-semibold">
+                            Correo electrónico: <span className="font-light">{datos.email}</span>
+                        </li>
+                    </ul>
                 </div>
+
+                <div className="flex mt-6 justify-between p-4 border-t">
+                    <button
+                        className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition font-medium shadow-md"
+                        onClick={handleEliminar}
+                    >Eliminar Cuenta</button>
+                    <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition font-medium shadow-md">
+                        Editar Perfil
+                    </button>
+                </div>
+                {eliminando && (
+                    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                        <div className="p-6 bg-white shadow-lg rounded-lg w-96">
+                            <p className="text-gray-800 mb-4 text-center font-semibold">
+                                ¿Estás seguro de que quieres eliminar tu perfil?
+                            </p>
+                            <div className="flex justify-center gap-4">
+                                <button
+                                    type="submit"
+                                    disabled={cargando}
+                                    onClick={() => eliminarPerfil(datos.id)}
+                                    className={`px-4 py-2 rounded-lg transition text-white 
+                    ${cargando ? "bg-gray-400 cursor-not-allowed" : "bg-red-500 hover:bg-red-600"}`}
+                                >
+                                    {cargando ? "Eliminando..." : "Eliminar"}
+                                </button>
+                                <button
+                                    className="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 transition"
+                                    onClick={handleCancelar}
+                                    disabled={cargando}
+                                >
+                                    Cancelar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
 
         </>

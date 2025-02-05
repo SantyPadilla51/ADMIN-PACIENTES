@@ -1,16 +1,17 @@
-// import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react";
 import NavbarAdmin from "./NavbarAdmin";
 import clienteAxios from "../config/axios";
-// import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const PerfilPaciente = () => {
   const navigate = useNavigate();
   const { id } = useParams()
-  const [eliminandoId, setEliminandoId] = useState(null)
+  const [eliminando, setEliminando] = useState(false)
+  const [cargando, setCargando] = useState(false);
   const [formData, setFormData] = useState({
     id: "",
     nombre: "",
@@ -51,12 +52,12 @@ const PerfilPaciente = () => {
     }
   }
 
-  const eliminarPaciente = async (e, id) => {
-    // const cardBody = e.target.parentElement.parentElement
-    setEliminandoId(id)
+  const eliminarPaciente = async (id) => {
+    setCargando(true);
     try {
       const token = localStorage.getItem('token')
       const url = `/eliminar-paciente/${id}`
+
       const { data } = await clienteAxios.delete(url, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -64,20 +65,29 @@ const PerfilPaciente = () => {
       })
 
       if (data.ok === true) {
-        cardBody.classList.add('scale-out-horizontal')
+        toast.success('Paciente eliminado correctamente', {
+          position: 'top-center'
+        })
         setTimeout(() => {
-          obtenerPacientes()
-        }, 1000);
+          navigate("/admin/pacientes")
+        }, 2500);
       } else {
+        setCargando(false);
         toast.error(data.msg)
       }
 
     } catch (error) {
-      setCargando(false)
+      setCargando(false);
       toast.error('Ocurrió un error')
-    } finally {
-      setEliminandoId(null)
     }
+  }
+
+  const handleEliminar = () => {
+    setEliminando(true)
+  }
+
+  const handleCancelar = () => {
+    setEliminando(false)
   }
 
   useEffect(() => {
@@ -87,7 +97,7 @@ const PerfilPaciente = () => {
   return (
     <>
       <NavbarAdmin />
-      {/* <ToastContainer /> */}
+      <ToastContainer />
       <div className="max-w-4xl mx-auto bg-white p-8 rounded-md shadow-md mt-10">
         <h2 className="text-2xl font-bold mb-6 text-gray-800 text-center">Perfil del Paciente</h2>
         <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -186,9 +196,39 @@ const PerfilPaciente = () => {
             Actualizar Sintomas
           </button>
 
-          <button className="text-sm bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md" onClick={() => navigate(`/actualizar-sintomas/${formData.id}`)}>
+          <button className="text-sm bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md" onClick={handleEliminar}>
             Eliminar Paciente
           </button>
+
+          {eliminando && (
+            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+              <div className="p-6 bg-white shadow-lg rounded-lg w-96">
+                <p className="text-gray-800 mb-4 text-center font-semibold">
+                  ¿Estás seguro de que quieres eliminar este paciente?
+                </p>
+                <div className="flex justify-center gap-4">
+                  <button
+                    type="submit"
+                    disabled={cargando}
+                    onClick={() => eliminarPaciente(id)}
+                    className={`px-4 py-2 rounded-lg transition text-white 
+                    ${cargando ? "bg-gray-400 cursor-not-allowed" : "bg-red-500 hover:bg-red-600"}`}
+                  >
+                    {cargando ? "Eliminando..." : "Eliminar"}
+                  </button>
+                  <button
+                    className="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 transition"
+                    onClick={handleCancelar}
+                    disabled={cargando} 
+                  >
+                    Cancelar
+                  </button>
+                </div>;
+              </div>
+            </div>
+          )}
+
+
         </div>
       </div>
     </>
