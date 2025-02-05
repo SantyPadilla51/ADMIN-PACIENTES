@@ -134,7 +134,7 @@ const Pacientes = () => {
                         </div>
                     </div>
                 ) : pacientes.length === 0 ? (
-                    <p className="text-center text-white bg-black p-2 col-start-2 col-end-5">No hay pacientes registrados</p>
+                    <p className="text-center text-white bg-black p-2 col-start-2 col-end-5 rounded-md">No hay pacientes registrados</p>
                 ) : (
                     pacientes.map(paciente => (
                         <div className="mt-4 bg-white shadow-2xl flex flex-col lg:gap-10 p-2 justify-between rounded-md" key={paciente.id}>
