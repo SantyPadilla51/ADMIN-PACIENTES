@@ -44,7 +44,7 @@ const Pacientes = () => {
             setPacientes(data)
 
         } catch (error) {
-            console.log('Hubo un error');
+            toast.error('Hubo un error');
         }
     }
 
@@ -82,7 +82,7 @@ const Pacientes = () => {
                 </form>
 
                 <div className="lg:ms-8 flex col-start-5 col-end-8 gap-3">
-                    <div className="">
+                    <div >
                         <button
                             className="rounded bg-indigo-600 text-white px-5 hover:bg-indigo-500 p-3 mt-5 text-center"
                             onClick={() => navigate('crear-paciente')}
@@ -90,7 +90,7 @@ const Pacientes = () => {
                             Agregar Paciente
                         </button>
                     </div>
-                    <div className="">
+                    <div>
                         <button
                             className="rounded bg-indigo-600 text-white hover:bg-indigo-500 p-3 mt-5 text-center"
                             onClick={verPacientes}
@@ -98,9 +98,9 @@ const Pacientes = () => {
                             Ver todos los Pacientes
                         </button>
                     </div>
-                    <div className="">
+                    <div>
                         <button
-                            className="bg-lime-600 text-white px-5 hover:bg-lime-500 p-3 mt-5 text-center"
+                            className="rounded-md bg-teal-500 text-white px-5 hover:bg-teal-600  p-3 mt-5 text-center"
                             onClick={() => navigate('perfil')}
                         >
                             Mi Perfil
@@ -112,7 +112,7 @@ const Pacientes = () => {
 
             <div className=" md:grid md:grid-cols-3 lg:grid lg:grid-cols-6 gap-4 m-8">
                 {pacienteParticular ? (
-                    <div className="bg-white flex flex-col gap-10 p-2" key={pacienteParticular.id}>
+                    <div className="bg-white flex flex-col gap-10 p-2 rounded-md" key={pacienteParticular.id}>
                         <div className="flex flex-col gap-2">
                             <p className="font-semibold">Nombre: <span className="text-black font-normal">{pacienteParticular.nombre}</span></p>
                             <p className="font-semibold">Apellido: <span className="font-normal">{pacienteParticular.apellido}</span></p>
@@ -137,7 +137,7 @@ const Pacientes = () => {
                     <p className="text-center text-white bg-black p-2 col-start-2 col-end-5">No hay pacientes registrados</p>
                 ) : (
                     pacientes.map(paciente => (
-                        <div className="mt-4 bg-white shadow-2xl flex flex-col lg:gap-10 p-2 justify-between" key={paciente.id}>
+                        <div className="mt-4 bg-white shadow-2xl flex flex-col lg:gap-10 p-2 justify-between rounded-md" key={paciente.id}>
                             <div className="flex flex-col gap-2">
                                 <p className="font-semibold">Nombre: <span className="text-black font-normal">{paciente.nombre}</span></p>
                                 <p className="font-semibold">Apellido: <span className="font-normal">{paciente.apellido}</span></p>

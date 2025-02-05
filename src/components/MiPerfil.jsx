@@ -1,5 +1,6 @@
 import { ToastContainer, toast } from 'react-toastify';
 import { useEffect, useState } from "react"
+import { useNavigate } from 'react-router-dom';
 import clienteAxios from "../config/axios"
 import NavbarAdmin from "./NavbarAdmin"
 import 'react-toastify/dist/ReactToastify.css';
@@ -7,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const MiPerfil = () => {
 
+    const navigate = useNavigate()
     const [eliminando, setEliminando] = useState(false)
     const [cargando, setCargando] = useState(false);
     const [datos, setDatos] = useState({
@@ -59,7 +61,7 @@ const MiPerfil = () => {
 
             if (data.ok === true) {
                 localStorage.removeItem('token')
-                toast.success(data.msg,{
+                toast.success(data.msg, {
                     position: "top-center"
                 })
                 setTimeout(() => {
@@ -118,7 +120,9 @@ const MiPerfil = () => {
                         className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition font-medium shadow-md"
                         onClick={handleEliminar}
                     >Eliminar Cuenta</button>
-                    <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition font-medium shadow-md">
+                    <button
+                        onClick={() => navigate(`/editar-perfil/${datos.id}`)}
+                        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition font-medium shadow-md">
                         Editar Perfil
                     </button>
                 </div>

@@ -13,6 +13,7 @@ import ContenedorPacientes from './components/ContenedorPacientes'
 import ActualizarSintomas from './components/ActualizarSintomas'
 import MiPerfil from './components/MiPerfil'
 import PerfilPaciente from './components/PerfilPaciente'
+import EditarPerfil from './components/EditarPerfil'
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route path="confirmar-cuenta/:token" element={<ConfirmarCuenta />} />
             <Route path="olvide-password/" element={<RestablecerPassword />} />
             <Route path="olvide-password/:token" element={<NuevoPassword />} />
+            <Route path="editar-perfil/:id" element={<EditarPerfil />} />
 
             <Route path='/admin' element={<RutasProtegidas />}>
               <Route path='pacientes' element={<ContenedorPacientes/>} />
