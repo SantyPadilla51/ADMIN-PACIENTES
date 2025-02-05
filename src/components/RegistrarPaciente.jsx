@@ -135,6 +135,7 @@ const RegistrarPaciente = () => {
                             type="text"
                             id="dni"
                             name="dni"
+                            maxLength={8}
                             value={paciente.dni}
                             onChange={handleChange}
                             className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none  sm:text-sm"

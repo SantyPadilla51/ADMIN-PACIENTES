@@ -52,7 +52,7 @@ const PerfilPaciente = () => {
     }
   }
 
-  const eliminarPaciente = async (id) => {
+  const eliminarPaciente = async () => {
     setCargando(true);
     try {
       const token = localStorage.getItem('token')
@@ -212,7 +212,7 @@ const PerfilPaciente = () => {
                 <button
                   type="submit"
                   disabled={cargando}
-                  onClick={() => eliminarPaciente(id)}
+                  onClick={eliminarPaciente}
                   className={`px-4 py-2 rounded-lg transition text-white 
                     ${cargando ? "bg-gray-400 cursor-not-allowed" : "bg-red-500 hover:bg-red-600"}`}
                 >
