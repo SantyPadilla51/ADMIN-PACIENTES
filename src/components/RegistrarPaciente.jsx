@@ -19,7 +19,8 @@ const RegistrarPaciente = () => {
         sexo: "",
         telefono: "",
         sintomas: "",
-        medicacion: ""
+        medicacion: "",
+        cobertura: ""
     });
 
     const handleChange = (e) => {
@@ -62,7 +63,7 @@ const RegistrarPaciente = () => {
             <ToastContainer />
             <div className="max-w-4xl mx-auto bg-white p-8 rounded-md shadow-md mt-10">
                 <h2 className="text-2xl font-bold mb-6 text-gray-800 text-center">Registrar Paciente</h2>
-                <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <form className="flex flex-col lg:grid md:grid-cols-2 gap-6" onSubmit={handleSubmit}>
                     <div>
                         <label className="block text-sm font-medium text-gray-700">
                             Nombre
@@ -158,6 +159,54 @@ const RegistrarPaciente = () => {
                             <option value="masculino">Masculino</option>
                             <option value="femenino">Femenino</option>
                             <option value="no definido">No definido</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">
+                            Cobertura Medica
+                        </label>
+                        <select
+                            id="cobertura"
+                            name="cobertura"
+                            value={paciente.cobertura}
+                            onChange={handleChange}
+                            className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none  sm:text-sm"
+                        >
+                            <option value="">Selecciona una opción</option>
+                            <option value="osde">OSDE</option>
+                            <option value="swiss_medical">Swiss Medical</option>
+                            <option value="galeno">Galeno</option>
+                            <option value="medicus">Medicus</option>
+                            <option value="omint">Omint</option>
+                            <option value="hospital_italiano">Hospital Italiano</option>
+                            <option value="hospital_britanico">Hospital Británico</option>
+                            <option value="osdepyme">OSDEPYME</option>
+                            <option value="accord_salud">Accord Salud</option>
+                            <option value="sancor_salud">Sancor Salud</option>
+                            <option value="osde_binario">OSDE Binario</option>
+                            <option value="premedic">Premedic</option>
+                            <option value="medifé">Medifé</option>
+                            <option value="aca_salud">ACA Salud</option>
+                            <option value="staff_médico">Staff Médico</option>
+                            <option value="docthos">Docthos</option>
+                            <option value="ospat">OSPAT</option>
+                            <option value="ospaca">OSPACA</option>
+                            <option value="ospjn">OSPJN</option>
+                            <option value="ospesgype">OSPESGYPE</option>
+                            <option value="ospedyc">OSPedyC</option>
+                            <option value="ospim">OSPIM</option>
+                            <option value="ospia">OSPIA</option>
+                            <option value="ospiv">OSPIV</option>
+                            <option value="ospel">OSPEL</option>
+                            <option value="ospf">OSPF</option>
+                            <option value="ospm">OSPM</option>
+                            <option value="osppra">OSPPRA</option>
+                            <option value="osppc">OSPPC</option>
+                            <option value="osppc">OSPPc</option>
+                            <option value="osppra">OSPPRA</option>
+                            <option value="osppce">OSPPCe</option>
+                            <option value="osppc">OSPPC</option>
                         </select>
                     </div>
 

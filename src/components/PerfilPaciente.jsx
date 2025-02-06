@@ -22,7 +22,8 @@ const PerfilPaciente = () => {
     email: "",
     telefono: "",
     medicacion: "",
-    sintomas: ""
+    sintomas: "",
+    cobertura: ""
   });
 
   const obtenerPaciente = async () => {
@@ -45,7 +46,8 @@ const PerfilPaciente = () => {
         email: data.paciente[0].email || "",
         telefono: data.paciente[0].telefono || "",
         medicacion: data.paciente[0].medicacion || "Sin medicacion",
-        sintomas: data.paciente[0].sintomas || ""
+        sintomas: data.paciente[0].sintomas || "",
+        cobertura: data.paciente[0].cobertura || "Sin cobertura"
       });
     } catch (error) {
       toast.error("Ha ocurrido un error");
@@ -163,6 +165,15 @@ const PerfilPaciente = () => {
             <h2
               className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
             >{formData.email}</h2>
+          </div>
+
+          <div className="md:col-span-2">
+            <label className="block text-sm font-medium text-gray-700">
+              Cobertura
+            </label>
+            <h2
+              className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
+            >{formData.cobertura}</h2>
           </div>
 
           <div className="md:col-span-2">

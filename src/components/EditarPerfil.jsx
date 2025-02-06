@@ -92,7 +92,7 @@ const EditarPerfil = () => {
             <ToastContainer />
             <div className="max-w-2xl mx-4 lg:mx-auto bg-white p-6 rounded-lg shadow-md mt-10">
                 <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6">Editar Perfil</h2>
-                <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-8">
+                <form onSubmit={handleSubmit} className="flex flex-col lg:grid lg:grid-cols-2 gap-6">
                     <div>
                         <label className="text-gray-600 text-sm font-medium">Nombre</label>
                         <input

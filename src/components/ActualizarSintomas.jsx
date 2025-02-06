@@ -95,7 +95,7 @@ const ActualizarSintomas = () => {
             <ToastContainer />
             <div className="max-w-4xl mx-4 lg:mx-auto bg-white p-8 rounded-md shadow-md mt-10">
                 <h2 className="text-2xl font-bold mb-6 text-gray-800 text-center">Actualizar Sintomas</h2>
-                <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <form className="flex flex-col lg:grid md:grid-cols-2 gap-6">
                     <div>
                         <label className="block text-sm font-medium text-gray-700">
                             Nombre

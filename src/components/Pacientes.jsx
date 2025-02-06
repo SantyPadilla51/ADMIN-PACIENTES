@@ -48,8 +48,6 @@ const Pacientes = () => {
         }
     }
 
-    
-
     const verPacientes = () => {
         setPacienteParticular(null)
         setBuscador('')
