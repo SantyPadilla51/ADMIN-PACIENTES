@@ -24,10 +24,10 @@ const RestablecerPassword = () => {
     }
 
     try {
-      
+
       const url = "olvide-password"
-      
-      const {data} = await clienteAxios.post(url, { email }, {
+
+      const { data } = await clienteAxios.post(url, { email }, {
         headers: { 'Content-Type': 'application/json' }
       });
 
@@ -53,37 +53,57 @@ const RestablecerPassword = () => {
     }
   }
 
-
   const handleChange = (e) => {
     setEmail(e.target.value)
   }
 
+  const handleNavigate = () => {
+    navigate(`/`)
+  }
+
   return (
     <>
-     <ToastContainer />
-
+      <ToastContainer />
       <Navbar />
-      <form className="mt-10 mx-3 drop-shadow-lg bg-slate-400 flex flex-col p-4  gap-3 lg:w-1/3 lg:mx-auto lg:mt-32" onSubmit={handleSubmit}>
+      <div className="bg-gray-100">
+        <button className="mt-4 ms-4 bg-slate-500 p-2 rounded hover:bg-slate-400" onClick={handleNavigate}>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="20 20" stroke-width="2" stroke={"#fff"} className="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+          </svg>
+        </button>
+      </div>
 
-        <h1 className="text-xl bg-white p-2 uppercase">Restablece tu Password</h1>
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <form
+          className="-mt-36 mx-4 drop-shadow-lg bg-white flex flex-col p-6 gap-4 rounded-lg lg:w-1/3 lg:mx-auto border border-gray-200"
+          onSubmit={handleSubmit}
+        >
+          <h1 className="text-2xl font-semibold text-gray-800 text-center">Restablece tu Contraseña</h1>
+          <p className="text-gray-600 text-center">
+            Ingresa tu correo para recibir instrucciones de restablecimiento
+          </p>
 
-        <h2>Ingresa tu correo para poder enviar las instrucciones</h2>
+          <div className="flex flex-col gap-2">
+            <label className="text-gray-700 font-medium">Correo electrónico</label>
+            <input
+              className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+              type="email"
+              name="email"
+              placeholder="ejemplo@correo.com"
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <div className="flex flex-col mt-5">
-          <label>Correo electrónico:</label>
-          <input className="p-1" type="email" name="email" onChange={(e) => handleChange(e)} />
-        </div>
-
-        {cargando ? (
-          <button className="bg-blue-800 text-white p-2 hover:bg-blue-600 mt-5" type="submit">
-            <ClipLoader color={'#fff'} />
+          <button
+            className="bg-blue-600 text-white p-2 rounded-md hover:bg-blue-500 transition-all flex items-center justify-center mt-4"
+            type="submit"
+            disabled={cargando}
+          >
+            {cargando ? <ClipLoader color={'#fff'} size={20} /> : "Enviar Instrucciones"}
           </button>
-        ) : (
-          <button className="bg-blue-800 text-white p-2 hover:bg-blue-600 mt-5" type="submit">Enviar Instrucciones</button>
-        )}
-
-
-      </form>
+        </form>
+      </div>
     </>
   )
 }

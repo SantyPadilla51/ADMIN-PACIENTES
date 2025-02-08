@@ -33,8 +33,6 @@ const EditarPaciente = () => {
                 }
             }
             const { data } = await clienteAxios.get(url, config)
-            console.log(data);
-
 
             setFormData({
                 nombre: data.paciente[0].nombre || "",
@@ -91,6 +89,10 @@ const EditarPaciente = () => {
         });
     };
 
+    const handleNavigate = () => {
+        navigate(`/admin/pacientes/perfilPaciente/${id}`)
+    }
+
     useEffect(() => {
         obtenerPaciente();
     }, [])
@@ -99,6 +101,11 @@ const EditarPaciente = () => {
         <>
             <NavbarAdmin />
             <ToastContainer />
+            <button className="mt-4 ms-4 bg-slate-500 p-2 rounded hover:bg-slate-400" onClick={handleNavigate}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="20 20" stroke-width="2" stroke={"#fff"} className="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                </svg>
+            </button>
             <div className="max-w-4xl mx-4 lg:mx-auto bg-white p-8 rounded-md shadow-md mt-10">
                 <h2 className="text-2xl font-bold mb-6 text-gray-800 text-center">Editar Paciente</h2>
                 <form className="flex flex-col lg:grid md:grid-cols-2 gap-6">

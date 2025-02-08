@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
+import { useParams } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
 import Navbar from "./Navbar";
 import clienteAxios from "../config/axios";
@@ -10,6 +11,7 @@ const NuevoPassword = () => {
     const [password, setPassword] = useState("")
     const [repetirPassword, setRepetirPassword] = useState("")
     const [cargando, setCargando] = useState(false)
+    const { token } = useParams()
     const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
@@ -19,18 +21,12 @@ const NuevoPassword = () => {
         if (password === repetirPassword) {
             try {
                 setCargando(true)
-
-                const token = localStorage.getItem('token')
                 const url = `/olvide-password/${token}`
-                const config = {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    }
-                }
-
-                const { data } = await clienteAxios.post(url, password, config)
-
+                console.log(password);
+                
+                const { data } = await clienteAxios.post(url, {password})
+                console.log(data);
+                
                 if (data.ok != true) {
                     toast.error("Hubo un error al cambiar la contraseña")
                     setCargando(false)
@@ -45,6 +41,8 @@ const NuevoPassword = () => {
 
             } catch (error) {
                 toast.error("Ha ocurrido un error")
+                console.log(error);
+                
                 setCargando(false)
             }
 

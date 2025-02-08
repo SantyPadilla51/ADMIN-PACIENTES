@@ -2,9 +2,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react";
+import Skeleton from 'react-loading-skeleton'
 import NavbarAdmin from "./NavbarAdmin";
 import clienteAxios from "../config/axios";
 import 'react-toastify/dist/ReactToastify.css';
+import 'react-loading-skeleton/dist/skeleton.css'
 
 
 const PerfilPaciente = () => {
@@ -93,6 +95,10 @@ const PerfilPaciente = () => {
     setEliminando(false)
   }
 
+  const handleNavigate = () => {
+    navigate(`/admin/pacientes`)
+  }
+
   useEffect(() => {
     obtenerPaciente();
   }, [])
@@ -101,6 +107,12 @@ const PerfilPaciente = () => {
     <>
       <NavbarAdmin />
       <ToastContainer />
+      <button className="mt-4 ms-4 bg-slate-500 p-2 rounded hover:bg-slate-400" onClick={handleNavigate}>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="20 20" stroke-width="2" stroke={"#fff"} className="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+      </button>
+
       <div className="max-w-4xl mx-4 lg:mx-auto bg-white p-8 rounded-md shadow-md mt-10">
         <h2 className="text-2xl font-bold mb-6 text-gray-800 text-center">Perfil del Paciente</h2>
         <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -110,7 +122,7 @@ const PerfilPaciente = () => {
             </label>
             <h2
               className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
-            >{formData.nombre}</h2>
+            >{formData.nombre || <Skeleton/>}</h2>
           </div>
 
           <div>
@@ -119,7 +131,7 @@ const PerfilPaciente = () => {
             </label>
             <h2
               className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
-            >{formData.apellido}</h2>
+            >{formData.apellido || <Skeleton/>}</h2>
           </div>
 
           <div>
@@ -128,7 +140,7 @@ const PerfilPaciente = () => {
             </label>
             <h2
               className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
-            >{formData.edad}</h2>
+            >{formData.edad || <Skeleton/>}</h2>
           </div>
 
           <div>
@@ -137,7 +149,7 @@ const PerfilPaciente = () => {
             </label>
             <h2
               className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
-            >{formData.telefono}</h2>
+            >{formData.telefono || <Skeleton/>}</h2>
           </div>
 
           <div>
@@ -146,7 +158,7 @@ const PerfilPaciente = () => {
             </label>
             <h2
               className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
-            >{formData.dni}</h2>
+            >{formData.dni || <Skeleton/>}</h2>
           </div>
 
           <div>
@@ -155,7 +167,7 @@ const PerfilPaciente = () => {
             </label>
             <h2
               className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
-            >{formData.sexo}</h2>
+            >{formData.sexo || <Skeleton/>}</h2>
           </div>
 
           <div className="md:col-span-2">
@@ -164,7 +176,7 @@ const PerfilPaciente = () => {
             </label>
             <h2
               className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
-            >{formData.email}</h2>
+            >{formData.email || <Skeleton/>}</h2>
           </div>
 
           <div className="md:col-span-2">
@@ -173,7 +185,7 @@ const PerfilPaciente = () => {
             </label>
             <h2
               className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
-            >{formData.cobertura}</h2>
+            >{formData.cobertura || <Skeleton/>}</h2>
           </div>
 
           <div className="md:col-span-2">
@@ -182,7 +194,7 @@ const PerfilPaciente = () => {
             </label>
             <h2
               className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
-            >{formData.medicacion}</h2>
+            >{formData.medicacion || <Skeleton/>}</h2>
           </div>
 
           <div className="md:col-span-2">
@@ -191,7 +203,7 @@ const PerfilPaciente = () => {
             </label>
             <h2
               className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
-            >{formData.sintomas}</h2>
+            >{formData.sintomas || <Skeleton/>}</h2>
           </div>
 
           <div className="flex gap-4 justify-evenly mt-5 md:col-span-2">

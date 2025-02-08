@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import Skeleton from "react-loading-skeleton";
 import clienteAxios from "../config/axios";
 import NavbarAdmin from "./NavbarAdmin";
+import 'react-loading-skeleton/dist/skeleton.css'
 
 
 const EditarPerfil = () => {
@@ -82,6 +84,10 @@ const EditarPerfil = () => {
         setDatos({ ...datos, [e.target.name]: e.target.value });
     };
 
+    const handleNavigate = () => {
+        navigate(`/admin/pacientes/perfil`)
+    }
+
     useEffect(() => {
         obtenerDatos()
     }, [])
@@ -90,6 +96,11 @@ const EditarPerfil = () => {
         <>
             <NavbarAdmin />
             <ToastContainer />
+            <button className="mt-4 ms-4 bg-slate-500 p-2 rounded hover:bg-slate-400" onClick={handleNavigate}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="20 20" stroke-width="2" stroke={"#fff"} className="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                </svg>
+            </button>
             <div className="max-w-2xl mx-4 lg:mx-auto bg-white p-6 rounded-lg shadow-md mt-10">
                 <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6">Editar Perfil</h2>
                 <form onSubmit={handleSubmit} className="flex flex-col lg:grid lg:grid-cols-2 gap-6">
@@ -98,7 +109,7 @@ const EditarPerfil = () => {
                         <input
                             type="text"
                             name="nombre"
-                            value={datos.nombre}
+                            value={datos.nombre || <Skeleton/>}
                             onChange={handleChange}
                             className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
                             required
@@ -109,7 +120,7 @@ const EditarPerfil = () => {
                         <input
                             type="text"
                             name="apellido"
-                            value={datos.apellido}
+                            value={datos.apellido || <Skeleton/>}
                             onChange={handleChange}
                             className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
                             required
@@ -120,7 +131,7 @@ const EditarPerfil = () => {
                         <input
                             type="email"
                             name="email"
-                            value={datos.email}
+                            value={datos.email || <Skeleton/>}
                             onChange={handleChange}
                             className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
                             required
@@ -132,7 +143,7 @@ const EditarPerfil = () => {
                             type="text"
                             name="dni"
                             maxLength={8}
-                            value={datos.dni}
+                            value={datos.dni || <Skeleton/>}
                             onChange={handleChange}
                             className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
                             required
@@ -142,7 +153,7 @@ const EditarPerfil = () => {
                     <div className="flex items-center justify-around mt-3 col-span-2">
                         <label>Especialidad:</label>
                         <select className="mt-1 p-2 rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm" onChange={handleChange} name="especialidad" required>
-                            <option value="">{datos.especialidad}</option>
+                            <option value="">{datos.especialidad || <Skeleton/>}</option>
                             <option value="cardiología">Cardiología</option>
                             <option value="traumatologia">Traumatología</option>
                             <option value="neurología">Neurología</option>

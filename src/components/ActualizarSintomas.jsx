@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
+import Skeleton from 'react-loading-skeleton'
 import clienteAxios from "../config/axios";
 import NavbarAdmin from "./NavbarAdmin";
 import 'react-toastify/dist/ReactToastify.css';
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const ActualizarSintomas = () => {
 
@@ -84,6 +86,10 @@ const ActualizarSintomas = () => {
         }
     }
 
+    const handleNavigate = () => {
+        navigate(`/admin/pacientes/perfilPaciente/${id}`)
+    }
+
     useEffect(() => {
         obtenerPaciente()
     }, [])
@@ -93,6 +99,11 @@ const ActualizarSintomas = () => {
         <>
             <NavbarAdmin />
             <ToastContainer />
+            <button className="mt-4 ms-4 bg-slate-500 p-2 rounded hover:bg-slate-400" onClick={handleNavigate}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="20 20" stroke-width="2" stroke={"#fff"} className="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                </svg>
+            </button>
             <div className="max-w-4xl mx-4 lg:mx-auto bg-white p-8 rounded-md shadow-md mt-10">
                 <h2 className="text-2xl font-bold mb-6 text-gray-800 text-center">Actualizar Sintomas</h2>
                 <form className="flex flex-col lg:grid md:grid-cols-2 gap-6">
@@ -102,7 +113,7 @@ const ActualizarSintomas = () => {
                         </label>
                         <h2
                             className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
-                        >{paciente.nombre}</h2>
+                        >{paciente.nombre || <Skeleton/>}</h2>
                     </div>
 
                     <div>
@@ -111,7 +122,7 @@ const ActualizarSintomas = () => {
                         </label>
                         <h2
                             className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
-                        >{paciente.apellido}</h2>
+                        >{paciente.apellido || <Skeleton/>}</h2>
                     </div>
 
                     <div>
@@ -120,7 +131,7 @@ const ActualizarSintomas = () => {
                         </label>
                         <h2
                             className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
-                        >{paciente.edad}</h2>
+                        >{paciente.edad || <Skeleton/>}</h2>
                     </div>
 
                     <div>
@@ -129,7 +140,7 @@ const ActualizarSintomas = () => {
                         </label>
                         <h2
                             className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
-                        >{paciente.telefono}</h2>
+                        >{paciente.telefono || <Skeleton/>}</h2>
                     </div>
 
                     <div>
@@ -138,7 +149,7 @@ const ActualizarSintomas = () => {
                         </label>
                         <h2
                             className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
-                        >{paciente.dni}</h2>
+                        >{paciente.dni || <Skeleton/>}</h2>
                     </div>
 
                     <div>
@@ -147,7 +158,7 @@ const ActualizarSintomas = () => {
                         </label>
                         <h2
                             className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
-                        >{paciente.sexo}</h2>
+                        >{paciente.sexo || <Skeleton/>}</h2>
                     </div>
 
                     <div className="md:col-span-2">
@@ -156,7 +167,7 @@ const ActualizarSintomas = () => {
                         </label>
                         <h2
                             className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
-                        >{paciente.email}</h2>
+                        >{paciente.email || <Skeleton/>}</h2>
                     </div>
 
                     <div className="md:col-span-2">
@@ -167,7 +178,7 @@ const ActualizarSintomas = () => {
                             name="medicacion"
                             type="text"
                             onChange={(e) => handleChange(e)}
-                            value={paciente.medicacion}
+                            value={paciente.medicacion || <Skeleton/>}
                             className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
                         />
                     </div>
@@ -181,7 +192,7 @@ const ActualizarSintomas = () => {
                             type="text"
                             rows={4}
                             onChange={(e) => handleChange(e)}
-                            value={paciente.sintomas}
+                            value={paciente.sintomas || <Skeleton/>}
                             className="mt-1 p-2 block w-full rounded-md border-gray-300 bg-slate-100 shadow-md focus:outline-none sm:text-sm"
                         />
 

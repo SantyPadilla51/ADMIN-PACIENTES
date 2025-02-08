@@ -1,9 +1,11 @@
 import { ToastContainer, toast } from 'react-toastify';
 import { useEffect, useState } from "react"
 import { useNavigate } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton'
 import clienteAxios from "../config/axios"
 import NavbarAdmin from "./NavbarAdmin"
 import 'react-toastify/dist/ReactToastify.css';
+import 'react-loading-skeleton/dist/skeleton.css'
 
 
 const MiPerfil = () => {
@@ -82,6 +84,10 @@ const MiPerfil = () => {
         setEliminando(false)
     }
 
+    const handleNavigate = () => {
+        navigate(`/admin/pacientes`)
+    }
+
     useEffect(() => {
         obtenerPerfil()
     }, [])
@@ -90,6 +96,11 @@ const MiPerfil = () => {
         <>
             <NavbarAdmin />
             <ToastContainer />
+            <button className="mt-4 ms-4 bg-slate-500 p-2 rounded hover:bg-slate-400" onClick={handleNavigate}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="20 20" stroke-width="2" stroke={"#fff"} className="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                </svg>
+            </button>
             <div className="mx-4 lg:w-1/2 lg:mx-auto bg-white shadow-lg rounded-2xl mt-10 p-2">
                 <h1 className="text-xl font-bold text-center bg-black text-white p-3 rounded-t-2xl">
                     Mi Perfil
@@ -98,19 +109,19 @@ const MiPerfil = () => {
                 <div className="p-4">
                     <ul className="space-y-3 text-gray-700">
                         <li className="font-semibold">
-                            Nombre: <span className="font-light">{datos.nombre}</span>
+                            Nombre: <span className="font-light">{datos.nombre || <Skeleton />}</span>
                         </li>
                         <li className="font-semibold">
-                            Apellido: <span className="font-light">{datos.apellido}</span>
+                            Apellido: <span className="font-light">{datos.apellido || <Skeleton />}</span>
                         </li>
                         <li className="font-semibold">
-                            DNI: <span className="font-light">{datos.dni}</span>
+                            DNI: <span className="font-light">{datos.dni || <Skeleton />}</span>
                         </li>
                         <li className="font-semibold">
-                            Especialidad: <span className="font-light">{datos.especialidad}</span>
+                            Especialidad: <span className="font-light">{datos.especialidad || <Skeleton />}</span>
                         </li>
                         <li className="font-semibold">
-                            Correo electrónico: <span className="font-light">{datos.email}</span>
+                            Correo electrónico: <span className="font-light">{datos.email || <Skeleton />}</span>
                         </li>
                     </ul>
                 </div>
