@@ -67,7 +67,7 @@ const RegistrarUser = () => {
                 </button>
             </div>
             <div className="min-h-screen flex items-center justify-center bg-gray-100">
-                <form className="-mt-58 shadow-lg rounded-md mx-3 bg-white flex flex-col p-4 gap-3 lg:w-1/2 lg:mx-auto" onSubmit={(e) => handleSubmit(e)}>
+                <form className="-mt-58 shadow-lg rounded-md mx-3 bg-white flex flex-col p-4 gap-3 lg:w-1/2 lg:mx-auto lg:-mt-36" onSubmit={(e) => handleSubmit(e)}>
                     <h3 className="text-xl font-bold">Completa todos los campos</h3>
 
                     <div className="flex flex-col">
